@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Agrandir+Grand&display=swap" rel="stylesheet">
+
+    <link href="../images/N.png" rel="icon">
+    <title>Portfolio</title>
+
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+  </script>
+  <script type="text/javascript">
+  (function(){
+  emailjs.init({
+    publicKey: "BzamsNKNj0JET19r4",
+  });
+  })();
+  </script>
+  <script >function sendMail(){
+    let parms = { 
+        subject : document.getElementById("subject").value,
+        email : document.getElementById("email").value,
+        name : document.getElementById("name").value,
+        message : document.getElementById("message").value, 
+    };
+
+   emailjs.send("service_5py4mxc", "template_uwx5ick", parms)
+  .then(() => {
+    document.getElementById("contact-form").innerHTML = `
+      <div class="confirmation-message">
+        ✅ Merci ! Votre message a bien été envoyé.
+      </div>
+    `;
+  })
+  .catch((error) => {
+    alert("Une erreur s'est produite. Réessayez plus tard.");
+    console.error(error);
+  });
+
+}</script>
+
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="../index.html" class="logo">
+        <img src="../images/N.png" alt="Logo">
+      </a>
+      <ul>
+        <li><a href="#" class="nav-link">Accueil</a></li>
+      </ul>
+      <nav>
+        <div class="navbar2">
+          <div class="container nav-container">
+              <input class="checkbox" type="checkbox" name="" id="" />
+              <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+              </div>  
+            <div class="logo2">
+            
+            </div>
+            <div class="menu-items scrollable">
+              
+              <li><a href="../index.html">Accueil</a></li>
+              <li><a href="#" class="nav-link">Projets</a></li>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </nav>
+
+    
+  </header>
+  <img src="images/Lives.png" alt="banner" class="banner" >
+
+
+
+
+  <video autoplay muted loop class="background-video">
+    <source src="../images/White Waves - Background.mp4" type="video/mp4">
+  
+</video>
+
+
+
+  
+
+
+
+
+
+
+  
+</div><br><br><br><br><br><br><br><br>
+
+
+
+<br><br><br>
+
+<br><br>
+
+<footer class="footer-white">
+  <div class="footer-container">
+    <div class="footer-col">
+      <h3>Nassim MEZOUGHI</h3>
+      <br>
+      <p>Portfolio BTS SIO</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#formation">Cursus</a></li>
+        <li><a href="#profil">À propos de moi</a></li>
+        <li><a href="#projets">Me contacter</a></li>
+        <li><a href="#veilles">Veilles</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Me suivre</h4>
+      <div class="footer-socials">
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="mailto:antoine@example.com"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 NW Corp.
+  </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <script>const slider = document.querySelector('.slider');
+    const leftArrow = document.querySelector('.left');
+    const rightArrow = document.querySelector('.right');
+    const indicatorParents = document.querySelector('.controls ul');
+    var sectionIndex = 0;
+    
+    function setIndex() {
+     
+      document.querySelector('.controls .selected').classList.remove('selected')
+      slider.style.transform = 'translate(' + (sectionIndex)  * -25 + '%)' ; 
+      
+    }
+    
+    document.querySelectorAll('.controls li').forEach(function(indicator, ind) {indicator.addEventListener('click',function() {
+      sectionIndex = ind;
+      setIndex();
+        indicator.classList.add('selected');
+    
+     
+      
+    }); });
+    
+    rightArrow.addEventListener('click',function() { 
+      sectionIndex = (sectionIndex < 3) ? sectionIndex + 1 : 3 ;
+     indicatorParents.children[sectionIndex].classList.add('selected');
+    setIndex();
+      
+    });
+    
+    leftArrow.addEventListener('click',function() { 
+      sectionIndex = (sectionIndex > 0) ? sectionIndex - 1 : 0 ;
+      indicatorParents.children[sectionIndex].classList.add('selected');
+      setIndex();
+      
+    });</script>
+<script>
+  function openLightbox(imageSrc) {
+    document.getElementById("lightbox").style.display = "flex";
+    document.getElementById("lightbox-img").src = imageSrc;
+  
+    // Désactiver le scroll en ajoutant une classe au body
+    document.body.style.overflow = "hidden";
+  }
+  
+  function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+  
+    // Réactiver le scroll
+    document.body.style.overflow = "auto";
+  }
+</script>
+  
+
+  <script> 
+    
+const navbar = document.querySelector('.navbar');
+
+
+let lastScrollTop = 0; 
+
+window.addEventListener('scroll', () => {
+  
+  let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+  
+  if (currentScroll > lastScrollTop) {
+    navbar.classList.add('shrink'); 
+  } else {
+    navbar.classList.remove('shrink'); 
+  }
+
+  lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+
+  </script>
+    <script>
+  const button = document.getElementById("toggleButton");
+  const label = button.querySelector(".label");
+  const icon = button.querySelector(".icon");
+  const email = "nassimmezoughi5@gmail.com"; 
+
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    label.style.opacity = 0;
+    icon.style.opacity = 0; 
+
+    setTimeout(() => {
+      if (label.textContent === email) {
+        
+        label.textContent = "Mail";
+        button.classList.remove("auto-width"); 
+        icon.style.display = "flex"; 
+      } else {
+        label.textContent = email;
+        button.classList.add("auto-width");
+        icon.style.display = "none";
+      }
+
+      label.style.opacity = 1;
+      icon.style.opacity = 1; 
+    }, 300);
+  });
+    </script>
+  <script>
+   document.addEventListener("DOMContentLoaded", function () {
+    const checkbox = document.querySelector(".checkbox");
+    const menu = document.querySelector(".menu-items");
+  
+    checkbox.addEventListener("change", function () {
+      if (checkbox.checked) {
+        menu.classList.add("scrollable");
+        document.body.classList.add("no-scroll");
+      } else {
+        menu.classList.remove("scrollable");
+        document.body.classList.remove("no-scroll");
+      }
+    });
+  });
+  </script>
+
+ 
+
+<footer class="section-p1">
+</footer>
+
+
+<script src="script.js"></script>
+</body>
