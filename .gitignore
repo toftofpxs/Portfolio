@@ -36,6 +36,15 @@ Documentation/~$*
 *.ppt
 *.pptx
 
-# Media folders
-images/
-downloads/
+# Media folders (ignored by default)
+images/*
+downloads/*
+
+# Public assets used by the website
+!images/N.png
+!images/screencapture-localhost-5173-2026-03-19-00_10_06.png
+!images/Dynatrace-01.png
+!images/WhatsApp Image 2026-03-18 at 23.27.45.jpeg
+!images/doc.jpg
+!images/screencapture-farahfastreparations-netlify-app-2025-03-14-14_38_49.png
+!downloads/Documentation-projets.zip
