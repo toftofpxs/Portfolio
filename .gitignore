@@ -6,3 +6,5 @@ images/
 Documentation/
 Documentation/~$*
 Documentation/
+node_modules/
+dist/

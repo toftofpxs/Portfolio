@@ -1,230 +1,178 @@
-const rssSources = [
-  {
-    name: "Le Blog du Modérateur",
-    url: "https://www.blogdumoderateur.com/feed/",
-    topic: "Web et outils numeriques"
-  },
-  {
-    name: "Developpez.com",
-    url: "https://www.developpez.com/index/rss",
-    topic: "Developpement logiciel"
-  },
-  {
-    name: "The GitHub Blog",
-    url: "https://github.blog/feed/",
-    topic: "Ecosysteme developpeur"
-  }
-];
-
-const fallbackArticles = [
-  {
-    title: "React 19 : quels impacts pour les projets frontend ?",
-    source: "Le Blog du Moderateur",
-    topic: "Frontend",
-    date: "2026-02-10",
-    link: "https://www.blogdumoderateur.com/",
-    description: "Veille sur les evolutions React utiles pour la maintenabilite, la performance et les bonnes pratiques d'interface."
-  },
-  {
-    title: "Securiser une API REST Node.js : les points a verifier",
-    source: "Developpez.com",
-    topic: "Backend",
-    date: "2026-01-24",
-    link: "https://www.developpez.com/",
-    description: "Rappel des bonnes pratiques autour des tokens, de la validation d'entree, des roles et des reponses d'erreur."
-  },
-  {
-    title: "Pourquoi la veille Git et GitHub reste importante en BTS SIO",
-    source: "The GitHub Blog",
-    topic: "Outils",
-    date: "2025-12-14",
-    link: "https://github.blog/",
-    description: "Suivi des usages de versionnement, des workflows collaboratifs et des habitudes attendues en environnement professionnel."
-  },
-  {
-    title: "PostgreSQL et MySQL : quels criteres pour un projet d'application ?",
-    source: "Le Blog du Moderateur",
-    topic: "Base de donnees",
-    date: "2025-11-02",
-    link: "https://www.blogdumoderateur.com/",
-    description: "Comparatif utile pour justifier un choix de SGBD dans un dossier technique ou une presentation de projet."
-  }
-];
-
-const menuToggle = document.querySelector(".menu-toggle");
-const navPanel = document.querySelector(".nav-panel");
-const navLinks = [...document.querySelectorAll(".nav-panel a")];
+const body = document.body;
+const header = document.querySelector(".site-header");
+const burger = document.querySelector(".nav-burger");
+const navLinksPanel = document.querySelector(".nav-links");
+const navLinks = [...document.querySelectorAll(".nav-links a")];
 const sections = [...document.querySelectorAll("main section[id]")];
 const revealElements = [...document.querySelectorAll(".reveal")];
-const sourceList = document.getElementById("rss-sources");
-const feedContainer = document.getElementById("rss-feed");
-const statusNode = document.getElementById("rss-status");
+const heroName = document.querySelector(".hero-name");
+const cursor = document.querySelector(".custom-cursor");
 
-function toggleMenu(forceOpen) {
-  if (!menuToggle || !navPanel) {
+function splitHeroName() {
+  if (!heroName) {
     return;
   }
 
-  const nextState = typeof forceOpen === "boolean"
-    ? forceOpen
-    : menuToggle.getAttribute("aria-expanded") !== "true";
+  const value = heroName.dataset.stagger || "NASSIM|MEZOUGHI";
+  heroName.innerHTML = value
+    .split("")
+    .map((char, index) => {
+      if (char === "|") {
+        return '<span class="line-break"></span>';
+      }
 
-  menuToggle.setAttribute("aria-expanded", String(nextState));
-  navPanel.classList.toggle("is-open", nextState);
-  document.body.classList.toggle("menu-open", nextState);
-}
+      if (char === " ") {
+        return '<span class="char space" style="animation-delay:' + (index * 45) + 'ms"></span>';
+      }
 
-if (menuToggle && navPanel) {
-  menuToggle.addEventListener("click", () => toggleMenu());
-
-  navLinks.forEach((link) => {
-    link.addEventListener("click", () => toggleMenu(false));
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 760) {
-      toggleMenu(false);
-    }
-  });
-}
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("is-visible");
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.18,
-  rootMargin: "0px 0px -5% 0px"
-});
-
-revealElements.forEach((element) => revealObserver.observe(element));
-
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) {
-      return;
-    }
-
-    const activeId = entry.target.getAttribute("id");
-    navLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === `#${activeId}`;
-      link.classList.toggle("is-active", isActive);
-    });
-  });
-}, {
-  threshold: 0.45,
-  rootMargin: "-10% 0px -35% 0px"
-});
-
-sections.forEach((section) => sectionObserver.observe(section));
-
-function formatDate(dateString) {
-  const parsedDate = new Date(dateString);
-  if (Number.isNaN(parsedDate.getTime())) {
-    return "Date a verifier";
-  }
-
-  return new Intl.DateTimeFormat("fr-FR", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric"
-  }).format(parsedDate);
-}
-
-function sanitizeText(value, fallback = "") {
-  if (typeof value !== "string") {
-    return fallback;
-  }
-
-  return value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim() || fallback;
-}
-
-function renderSources() {
-  if (!sourceList) {
-    return;
-  }
-
-  sourceList.innerHTML = rssSources
-    .map((source) => `<li><strong>${source.name}</strong> • ${source.topic}</li>`)
+      return '<span class="char" style="animation-delay:' + (index * 45) + 'ms">' + char + "</span>";
+    })
     .join("");
 }
 
-function renderArticles(articles, modeLabel) {
-  if (!feedContainer || !statusNode) {
+function setMenuState(open) {
+  if (!burger || !navLinksPanel) {
     return;
   }
 
-  feedContainer.innerHTML = articles.map((article) => {
-    const title = sanitizeText(article.title, "Article de veille");
-    const description = sanitizeText(article.description || article.contentSnippet, "Resume indisponible.");
-    const source = sanitizeText(article.source, article.author || "Source externe");
-    const topic = sanitizeText(article.topic, "Veille");
-    const link = article.link || "#";
-    const date = formatDate(article.date || article.pubDate || article.publishedAt || new Date().toISOString());
-
-    return `
-      <article class="article-card">
-        <div class="article-meta">
-          <span>${source}</span>
-          <span>${topic}</span>
-          <span>${date}</span>
-        </div>
-        <h4>${title}</h4>
-        <p>${description}</p>
-        <a class="article-link" href="${link}" target="_blank" rel="noreferrer">Lire l'article</a>
-      </article>
-    `;
-  }).join("");
-
-  statusNode.textContent = modeLabel;
+  burger.setAttribute("aria-expanded", String(open));
+  body.classList.toggle("menu-open", open);
 }
 
-async function loadRssFeed() {
-  if (!feedContainer || !statusNode) {
+function setupMenu() {
+  if (!burger) {
     return;
   }
 
-  renderArticles(fallbackArticles, "Articles par defaut affiches");
+  burger.addEventListener("click", () => {
+    const open = burger.getAttribute("aria-expanded") !== "true";
+    setMenuState(open);
+  });
 
-  try {
-    const responses = await Promise.all(
-      rssSources.map(async (source) => {
-        const endpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}`;
-        const response = await fetch(endpoint);
-        if (!response.ok) {
-          throw new Error(`Flux indisponible pour ${source.name}`);
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => setMenuState(false));
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 900) {
+      setMenuState(false);
+    }
+  });
+}
+
+function setupScrollHeader() {
+  const onScroll = () => {
+    header?.classList.toggle("is-scrolled", window.scrollY > 10);
+  };
+
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+function setupReveal() {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+      rootMargin: "0px 0px -8% 0px"
+    }
+  );
+
+  revealElements.forEach((node) => observer.observe(node));
+}
+
+function setupActiveNav() {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
         }
 
-        const payload = await response.json();
-        const items = Array.isArray(payload.items) ? payload.items.slice(0, 3) : [];
-
-        return items.map((item) => ({
-          title: item.title,
-          description: item.description,
-          link: item.link,
-          date: item.pubDate,
-          source: source.name,
-          topic: source.topic
-        }));
-      })
-    );
-
-    const mergedArticles = responses
-      .flat()
-      .sort((left, right) => new Date(right.date) - new Date(left.date))
-      .slice(0, 6);
-
-    if (mergedArticles.length > 0) {
-      renderArticles(mergedArticles, "Flux RSS mis a jour");
+        const id = entry.target.getAttribute("id");
+        navLinks.forEach((link) => {
+          const active = link.getAttribute("href") === `#${id}`;
+          link.classList.toggle("active", active);
+        });
+      });
+    },
+    {
+      threshold: 0.55,
+      rootMargin: "-12% 0px -30% 0px"
     }
-  } catch (error) {
-    console.error(error);
-    statusNode.textContent = "Flux RSS indisponible, articles de secours affiches";
-  }
+  );
+
+  sections.forEach((section) => sectionObserver.observe(section));
 }
 
-renderSources();
-loadRssFeed();
+function setupCursor() {
+  if (!cursor || window.matchMedia("(hover: none), (pointer: coarse)").matches) {
+    return;
+  }
+
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let posX = mouseX;
+  let posY = mouseY;
+
+  const speed = 0.22;
+
+  window.addEventListener(
+    "mousemove",
+    (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+    },
+    { passive: true }
+  );
+
+  const loop = () => {
+    posX += (mouseX - posX) * speed;
+    posY += (mouseY - posY) * speed;
+    cursor.style.transform = `translate(${posX}px, ${posY}px)`;
+    requestAnimationFrame(loop);
+  };
+
+  loop();
+}
+
+function setupProjects() {
+  const projectRows = [...document.querySelectorAll(".project-row")];
+  
+  projectRows.forEach((row) => {
+    row.addEventListener("click", (event) => {
+      // Si on clique sur un lien dans les détails, ne pas fermer
+      if (event.target.tagName === "A") {
+        return;
+      }
+
+      // Toggle l'état expanded du projet cliqué
+      const isExpanded = row.classList.toggle("expanded");
+      
+      // Sur très petits écrans, fermer les autres projets
+      if (window.innerWidth < 480) {
+        projectRows.forEach((otherRow) => {
+          if (otherRow !== row) {
+            otherRow.classList.remove("expanded");
+          }
+        });
+      }
+    });
+  });
+}
+
+splitHeroName();
+setupMenu();
+setupScrollHeader();
+setupReveal();
+setupActiveNav();
+setupCursor();
+setupProjects();
+setupCursor();
