@@ -88,6 +88,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   border-bottom: 1px solid transparent;
   transition: border-color 180ms ease;
 }
@@ -106,12 +107,13 @@ textarea {
 .nav-links {
   display: none;
   position: absolute;
-  top: 4.25rem;
+  top: 100%;
   left: 0;
   right: 0;
   background: var(--bg);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  z-index: 20;
 }
 
 .nav-links a {
@@ -142,6 +144,8 @@ textarea {
   border: 1px solid var(--line);
   background: transparent;
   position: relative;
+  margin-left: auto;
+  flex-shrink: 0;
   cursor: pointer;
 }
 
@@ -233,27 +237,35 @@ main {
 .hero-name {
   margin: 0;
   font-family: var(--display);
-  font-size: clamp(4rem, 12vw, 10rem);
-  line-height: 0.92;
+  font-size: clamp(3rem, 10.5vw, 8.6rem);
+  line-height: 0.88;
   font-weight: 800;
   letter-spacing: -0.03em;
   max-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 100%;
 }
 
-.hero-name .char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(24px);
-  animation: char-in 650ms forwards;
-}
-
-.hero-name .char.space {
-  width: 0.36em;
-}
-
-.hero-name .line-break {
+.hero-name .typed-line {
   display: block;
-  height: 0.14em;
+  min-height: 0.92em;
+  max-width: 100%;
+}
+
+.hero-name .typed-line.last-name {
+  white-space: nowrap;
+}
+
+.hero-name .typing-cursor {
+  display: inline-block;
+  width: 0.08em;
+  height: 0.76em;
+  margin-left: 0.08em;
+  background: currentColor;
+  vertical-align: -0.06em;
+  animation: typing-cursor-blink 900ms steps(1, end) infinite;
 }
 
 .hero-accent {
@@ -518,6 +530,33 @@ main {
   border-bottom: 1px solid var(--line);
 }
 
+.comp-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.7rem 0 0.2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.comp-list li {
+  border: 1px solid var(--line);
+  padding: 0.22rem 0.55rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.comp-list li::before {
+  content: "✓";
+  color: var(--accent);
+}
+
 .resource-line {
   margin-top: 1.4rem;
   display: flex;
@@ -645,15 +684,15 @@ main {
   }
 }
 
-@keyframes char-in {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+@keyframes typing-cursor-blink {
+  0%,
+  49% {
+    opacity: 1;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  50%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -683,7 +722,7 @@ main {
   }
 
   .hero-name {
-    font-size: clamp(3.2rem, 14vw, 6.4rem);
+    font-size: clamp(1.9rem, 9.8vw, 4.3rem);
   }
 
   .project-main,
@@ -750,6 +789,11 @@ main {
 }
 
 @media (max-width: 480px) {
+  .hero-name {
+    font-size: clamp(1.45rem, 10vw, 2.45rem);
+    letter-spacing: -0.015em;
+  }
+
   .shell {
     width: min(1200px, calc(100vw - 1.25rem));
   }

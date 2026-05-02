@@ -8,26 +8,76 @@ const revealElements = [...document.querySelectorAll(".reveal")];
 const heroName = document.querySelector(".hero-name");
 const cursor = document.querySelector(".custom-cursor");
 
-function splitHeroName() {
+function setupHeroTyping() {
   if (!heroName) {
     return;
   }
 
-  const value = heroName.dataset.stagger || "NASSIM|MEZOUGHI";
-  heroName.innerHTML = value
-    .split("")
-    .map((char, index) => {
-      if (char === "|") {
-        return '<span class="line-break"></span>';
-      }
+  const rawValue = heroName.dataset.stagger || "NASSIM|MEZOUGHI";
+  const [firstNameRaw, lastNameRaw] = rawValue.split("|");
+  const firstName = (firstNameRaw || "").trim();
+  const lastName = (lastNameRaw || "").trim();
+  const lines = [firstName, lastName].filter(Boolean);
 
-      if (char === " ") {
-        return '<span class="char space" style="animation-delay:' + (index * 45) + 'ms"></span>';
-      }
+  if (!lines.length) {
+    return;
+  }
 
-      return '<span class="char" style="animation-delay:' + (index * 45) + 'ms">' + char + "</span>";
-    })
-    .join("");
+  heroName.textContent = "";
+  heroName.setAttribute("aria-label", lines.join(" "));
+
+  const lineElements = lines.map((_, index) => {
+    const line = document.createElement("span");
+    line.className = "typed-line";
+
+    if (index === lines.length - 1) {
+      line.classList.add("last-name");
+    }
+
+    heroName.append(line);
+    return line;
+  });
+
+  const typingCursor = document.createElement("span");
+  typingCursor.className = "typing-cursor";
+  typingCursor.setAttribute("aria-hidden", "true");
+  lineElements[0].append(typingCursor);
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    lineElements.forEach((line, index) => {
+      line.textContent = lines[index];
+    });
+    const lastLineElement = lineElements[lineElements.length - 1];
+    lastLineElement?.append(typingCursor);
+    return;
+  }
+
+  const baseDelay = 70;
+  const linePause = 200;
+
+  const typeLine = (lineIndex, charIndex = 0) => {
+    const currentLine = lines[lineIndex];
+    const currentElement = lineElements[lineIndex];
+
+    if (!currentLine || !currentElement) {
+      return;
+    }
+
+    if (charIndex < currentLine.length) {
+      currentElement.insertBefore(document.createTextNode(currentLine[charIndex]), typingCursor);
+      setTimeout(() => typeLine(lineIndex, charIndex + 1), baseDelay);
+      return;
+    }
+
+    const hasNextLine = lineIndex < lines.length - 1;
+
+    if (hasNextLine) {
+      lineElements[lineIndex + 1].append(typingCursor);
+      setTimeout(() => typeLine(lineIndex + 1, 0), linePause);
+    }
+  };
+
+  typeLine(0, 0);
 }
 
 function setMenuState(open) {
@@ -154,7 +204,7 @@ function setupProjects() {
       }
 
       // Toggle l'état expanded du projet cliqué
-      const isExpanded = row.classList.toggle("expanded");
+      row.classList.toggle("expanded");
       
       // Sur très petits écrans, fermer les autres projets
       if (window.innerWidth < 480) {
@@ -168,11 +218,10 @@ function setupProjects() {
   });
 }
 
-splitHeroName();
+setupHeroTyping();
 setupMenu();
 setupScrollHeader();
 setupReveal();
 setupActiveNav();
 setupCursor();
 setupProjects();
-setupCursor();
