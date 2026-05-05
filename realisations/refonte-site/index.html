@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Refonte de site">
+  <title>Refonte de site | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Refonte de site</p>
+      <p class="eyebrow">/refonte-site</p>
+      <h1 class="project-title">Refonte de site</h1>
+      <div class="tag-row">
+        <span>Responsive</span>
+        <span>UX</span>
+        <span>Vitrine</span>
+      </div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte détaillé</p>
+        <h2>Objectif du projet</h2>
+        <p>La mission consistait à refondre un site vitrine pour clarifier l'offre de service, améliorer la lisibilité des contenus et faciliter la prise de contact. Le site d'origine manquait de hiérarchie visuelle, de cohérence mobile et d'appels à l'action visibles.</p>
+      </article>
+
+      <article class="page-panel reveal">
+        <p class="eyebrow">Approche</p>
+        <h2>Choix de conception</h2>
+        <p>J'ai réorganisé l'information autour d'un parcours simple: présentation, preuves de sérieux, services, avis et contact. La refonte s'est concentrée sur la vitesse de compréhension et le confort de lecture sur mobile.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes refonte site">
+            <rect x="44" y="54" width="170" height="152" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="236" y="34" width="176" height="198" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="88" width="154" height="128" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="62" y="82">Page</text><text x="62" y="112">slug</text><text x="62" y="136">title</text><text x="62" y="160">sections</text>
+            <text x="256" y="62">Section</text><text x="256" y="92">id</text><text x="256" y="116">heading</text><text x="256" y="140">content</text><text x="256" y="164">position</text>
+            <text x="458" y="116">Lead</text><text x="458" y="146">id</text><text x="458" y="170">name</text><text x="458" y="194">phone</text>
+            <line x1="214" y1="128" x2="236" y2="128" stroke="#171311"></line>
+            <line x1="412" y1="128" x2="440" y2="128" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le contenu est structuré par pages et sections, avec un formulaire de contact traité séparément.</p>
+      </article>
+
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC refonte site">
+            <rect x="54" y="118" width="152" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="244" y="118" width="152" height="94" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="434" y="118" width="152" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="106" y="170">Templates</text><text x="288" y="170">Controller</text><text x="478" y="170">Content</text>
+            <line x1="206" y1="166" x2="244" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="434" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">La séparation template, contrôleur et contenu facilite les mises à jour sans casser la structure du site.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Configuration des sections</h2>
+        <p>Le contenu principal est piloté par une structure claire pour simplifier la maintenance.</p>
+        <div class="code-block"><pre><code>const sections = [
+  { id: "hero", title: "Accueil" },
+  { id: "services", title: "Services" },
+  { id: "contact", title: "Contact" }
+];</code></pre></div>
+      </article>
+
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>CTA prioritaire</h2>
+        <p>Le bouton d'action reste visible et lisible pour orienter rapidement l'utilisateur vers la prise de contact.</p>
+        <div class="code-block"><pre><code>const primaryCta = document.querySelector("[data-cta]");
+
+primaryCta?.addEventListener("click", () =&gt; {
+  window.location.href = "#contact";
+});</code></pre></div>
+      </article>
+
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Adaptation responsive</h2>
+        <p>Le layout bascule proprement sur mobile pour préserver l'ordre des informations essentielles.</p>
+        <div class="code-block"><pre><code>@media (max-width: 768px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 01</p>
+        <div class="gallery-shot">
+          <img src="/images/screencapture-farahfastreparations-netlify-app-2025-03-14-14_38_49.png" alt="Capture du site vitrine refondu">
+        </div>
+        <p class="gallery-caption">La page d'accueil met en avant les services et le contact avec un parcours plus direct.</p>
+      </article>
+
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 02</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Maquette mobile de la refonte">
+            <rect x="214" y="22" width="190" height="316" rx="22" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="238" y="58" width="142" height="30" fill="#171311"></rect>
+            <rect x="238" y="108" width="142" height="64" fill="#efe5d8"></rect>
+            <rect x="238" y="188" width="142" height="54" fill="#f1ddd2"></rect>
+            <rect x="238" y="258" width="142" height="42" fill="#efe5d8"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Version mobile pensée pour garder les messages clés et les boutons de contact immédiatement visibles.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats et bilan</p>
+        <h2>Bilan du projet</h2>
+        <p>La refonte a renforcé ma capacité à transformer un besoin de communication en structure claire et actionnable. J'y ai travaillé la hiérarchie de contenu, la cohérence responsive et les choix UX orientés conversion.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <span>NM</span>
+    <span>© <span data-year></span> Nassim Mezoughi</span>
+    <a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Veille technologique de Nassim Mezoughi sur l'IA, les GPU NVIDIA et TypeScript">
+  <title>Veille | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="veille">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / Veille</p>
+      <p class="eyebrow">Veille</p>
+      <h1 class="section-title">Méthodologie de veille, sources suivies, analyses d'articles et tendance TypeScript.</h1>
+    </section>
+
+    <section class="veille-grid page-section">
+      <article class="method-card reveal">
+        <p class="eyebrow">Méthodologie</p>
+        <h2>Processus de veille</h2>
+        <div class="bullet-list">
+          <p>Je définis d'abord trois axes de veille: intelligence artificielle, GPU NVIDIA et langages de programmation utilisés en production.</p>
+          <p>Je compare les annonces éditeurs, les retours d'expérience et les articles d'analyse pour distinguer l'effet d'annonce des usages concrets.</p>
+          <p>Je synthétise ensuite les informations utiles pour un développeur web: impact sur les performances, les outils, la maintenabilité et les choix de stack.</p>
+        </div>
+      </article>
+
+      <article class="method-card reveal">
+        <p class="eyebrow">Tendance</p>
+        <h2>Adoption de TypeScript</h2>
+        <p>La tendance la plus nette reste l'adoption continue de TypeScript dans les projets frontend et backend. Son typage améliore la lisibilité des contrats, limite les régressions lors des évolutions et facilite la collaboration sur des bases de code qui grandissent.</p>
+        <div class="chips">
+          <span>Sécurité de typage</span>
+          <span>Maintenance</span>
+          <span>Refactoring</span>
+          <span>Qualité d'équipe</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="sources-grid page-section">
+      <article class="method-card reveal">
+        <p class="eyebrow">Sources</p>
+        <h2>Sources suivies</h2>
+        <div class="sources-list">
+          <a href="https://www.technologyreview.com/topic/artificial-intelligence/" target="_blank" rel="noreferrer">MIT Technology Review - IA</a>
+          <a href="https://blogs.nvidia.com/" target="_blank" rel="noreferrer">NVIDIA Blog</a>
+          <a href="https://feed.infoq.com/" target="_blank" rel="noreferrer">InfoQ</a>
+          <a href="https://devblogs.microsoft.com/typescript/" target="_blank" rel="noreferrer">TypeScript Blog</a>
+          <a href="https://openai.com/news/" target="_blank" rel="noreferrer">OpenAI News</a>
+        </div>
+      </article>
+
+      <article class="rss-panel reveal">
+        <div class="rss-panel-head">
+          <div>
+            <p class="eyebrow">Flux RSS</p>
+            <h2>Actualités en temps réel</h2>
+          </div>
+          <button class="rss-refresh" type="button" data-rss-refresh>Actualiser</button>
+        </div>
+        <p class="rss-meta">Mise à jour automatique toutes les 5 minutes. <span class="rss-status" data-rss-status>Chargement du flux...</span></p>
+        <div class="rss-list" data-rss-list aria-live="polite">
+          <article class="rss-item">
+            <p>Chargement des derniers articles...</p>
+          </article>
+        </div>
+      </article>
+    </section>
+
+    <section class="analysis-grid page-section">
+      <article class="analysis-card reveal">
+        <p class="eyebrow">Article analysé 01</p>
+        <h2>NVIDIA et l'accélération de l'IA en entreprise</h2>
+        <p>L'intérêt principal de cet angle de veille est de comprendre pourquoi les GPU NVIDIA restent centraux dans les environnements IA. Les publications récentes montrent que la valeur n'est pas uniquement matérielle: elle réside aussi dans l'écosystème CUDA, les bibliothèques d'optimisation et l'intégration dans les workflows d'inférence.</p>
+        <ul class="article-points">
+          <li>Impact technique: réduction des temps de calcul et meilleure scalabilité pour les charges d'IA.</li>
+          <li>Impact projet: nécessité de penser l'architecture logicielle en fonction des coûts et des usages réels.</li>
+          <li>Point de vigilance: dépendance à un écosystème très dominant, ce qui influence les choix d'outillage.</li>
+        </ul>
+      </article>
+
+      <article class="analysis-card reveal">
+        <p class="eyebrow">Article analysé 02</p>
+        <h2>TypeScript comme standard de fait dans les équipes web</h2>
+        <p>Les articles suivis autour de TypeScript mettent en avant une adoption qui dépasse le simple confort développeur. Le typage devient un outil de communication dans les équipes: les interfaces, types et contrats d'API structurent les échanges entre frontend, backend et QA.</p>
+        <ul class="article-points">
+          <li>Impact technique: erreurs détectées plus tôt lors du développement.</li>
+          <li>Impact projet: montée en qualité des refactorings et réduction des ambiguïtés dans les évolutions.</li>
+          <li>Point de vigilance: maintenir des types simples et utiles pour éviter une complexité inutile.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <span>NM</span>
+    <span>© <span data-year></span> Nassim Mezoughi</span>
+    <a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Backend">
+  <title>Backend | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Backend</p>
+      <p class="eyebrow">/backend</p>
+      <h1 class="project-title">Backend</h1>
+      <div class="tag-row">
+        <span>Node.js</span>
+        <span>Express</span>
+        <span>MySQL</span>
+        <span>JWT</span>
+      </div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte detaille</p>
+        <h2>Objectif du backend</h2>
+        <p>Le backend devait centraliser la gestion des comptes, des evenements et des inscriptions avec une API REST fiable. L'objectif etait de garantir des echanges clairs avec le frontend, un controle d'acces robuste et des regles metier simples a maintenir.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats obtenus</p>
+        <h2>Ce qui a ete livre</h2>
+        <p>L'API expose des routes securisees, un schema de donnees coherent et des validations sur les operations sensibles. Le projet a permis de stabiliser les flux d'inscription et de rendre les erreurs plus lisibles pour l'interface cliente.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes backend evenementiel">
+            <rect x="36" y="44" width="176" height="168" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="232" y="24" width="182" height="216" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="72" width="164" height="144" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="56" y="72">User</text><text x="56" y="104">id</text><text x="56" y="128">email</text><text x="56" y="152">passwordHash</text>
+            <text x="252" y="52">Event</text><text x="252" y="84">id</text><text x="252" y="108">title</text><text x="252" y="132">date</text><text x="252" y="156">capacity</text>
+            <text x="460" y="100">Registration</text><text x="460" y="132">id</text><text x="460" y="156">userId</text><text x="460" y="180">eventId</text>
+            <line x1="212" y1="126" x2="232" y2="126" stroke="#171311"></line>
+            <line x1="414" y1="126" x2="440" y2="126" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le modele relationnel relie utilisateurs, evenements et inscriptions avec un contrat API stable.</p>
+      </article>
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC backend">
+            <rect x="52" y="118" width="150" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="246" y="118" width="150" height="94" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="118" width="150" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="98" y="170">Routes</text><text x="286" y="170">Controllers</text><text x="492" y="170">Models</text>
+            <line x1="202" y1="166" x2="246" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="440" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le backend separe clairement les routes HTTP, les regles metier et l'acces aux donnees.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Route d'authentification</h2>
+        <p>La route de connexion valide l'utilisateur puis renvoie un token JWT pour les appels proteges.</p>
+        <div class="code-block"><pre><code>router.post("/login", async (request, response) =&gt; {
+  const user = await authService.login(request.body);
+
+  response.json({
+    token: user.token,
+    profile: user.profile
+  });
+});</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Controle de capacite</h2>
+        <p>Cette regle metier empeche les inscriptions quand la capacite maximale est atteinte.</p>
+        <div class="code-block"><pre><code>if (event.registrationsCount &gt;= event.capacity) {
+  return response.status(409).json({
+    message: "Evenement complet"
+  });
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Middleware de protection</h2>
+        <p>Le middleware verifie le token avant d'autoriser l'acces aux routes privees.</p>
+        <div class="code-block"><pre><code>export function requireAuth(request, response, next) {
+  const token = request.headers.authorization;
+
+  if (!token) {
+    return response.status(401).json({ message: "Acces refuse" });
+  }
+
+  next();
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 01</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Documentation des routes backend">
+            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="46" y="52" width="528" height="36" fill="#171311"></rect>
+            <rect x="46" y="108" width="528" height="42" fill="#efe5d8"></rect>
+            <rect x="46" y="166" width="528" height="42" fill="#f1ddd2"></rect>
+            <rect x="46" y="224" width="528" height="42" fill="#efe5d8"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Vue de la documentation des endpoints utilises par le frontend et l'app mobile.</p>
+      </article>
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 02</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Schema de base de donnees backend">
+            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="50" y="64" width="150" height="112" fill="#fff" stroke="#171311"></rect>
+            <rect x="234" y="44" width="150" height="164" fill="#fff" stroke="#171311"></rect>
+            <rect x="418" y="94" width="150" height="102" fill="#fff" stroke="#171311"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Schema de donnees simplifie pour expliquer les relations entre les tables metier.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats et bilan</p>
+        <h2>Bilan du projet backend</h2>
+        <p>Ce projet m'a permis de renforcer ma pratique d'Express, de la securisation JWT et du design d'API REST. J'ai egalement progresse sur la gestion des erreurs, la coherence des reponses JSON et le decoupage controleur/service.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Portail documentaire">
+  <title>Portail documentaire | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Portail documentaire</p>
+      <p class="eyebrow">/portail-documentaire</p>
+      <h1 class="project-title">Portail documentaire</h1>
+      <div class="tag-row"><span>Entreprise</span><span>AXA</span><span>Knowledge base</span><span>Markdown</span></div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte detaille</p>
+        <h2>Besoin documentaire</h2>
+        <p>Le portail a ete pense pour centraliser des procedures techniques, des guides de resolution et des consignes de maintenance. Le but etait de limiter la dispersion d'information et de rendre la connaissance accessible rapidement aux equipes.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats obtenus</p>
+        <h2>Apports pour l'equipe</h2>
+        <p>La documentation est structuree par categories, avec un format homogene et des chemins de navigation simples. Cela facilite l'onboarding, reduit le temps de recherche et ameliore la qualite des interventions repetitives.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes portail documentaire">
+            <rect x="42" y="52" width="168" height="152" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="234" y="34" width="182" height="204" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="442" y="82" width="156" height="132" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="62" y="80">Category</text><text x="62" y="110">id</text><text x="62" y="134">name</text>
+            <text x="252" y="62">Article</text><text x="252" y="92">id</text><text x="252" y="116">title</text><text x="252" y="140">content</text><text x="252" y="164">categoryId</text>
+            <text x="460" y="110">Revision</text><text x="460" y="140">id</text><text x="460" y="164">articleId</text><text x="460" y="188">updatedAt</text>
+            <line x1="210" y1="124" x2="234" y2="124" stroke="#171311"></line>
+            <line x1="416" y1="124" x2="442" y2="124" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le portail relie categories, articles et revisions pour conserver l'historique documentaire.</p>
+      </article>
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC portail documentaire">
+            <rect x="52" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="246" y="120" width="150" height="92" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="106" y="172">Templates</text><text x="290" y="172">Controller</text><text x="494" y="172">Content</text>
+            <line x1="202" y1="166" x2="246" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="440" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Les pages affichent des contenus documentaires servis par une couche de controle simple.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Indexation des articles</h2>
+        <p>Cette fonction cree un index de recherche simple pour accelerer la consultation des pages.</p>
+        <div class="code-block"><pre><code>const searchIndex = articles.map((article) =&gt; ({
+  id: article.id,
+  title: article.title.toLowerCase(),
+  tokens: article.content.toLowerCase().split(/\s+/)
+}));</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Rendu markdown</h2>
+        <p>Le contenu des procedures est converti en HTML pour une lecture uniforme sur le portail.</p>
+        <div class="code-block"><pre><code>import { marked } from "marked";
+
+function renderArticle(markdown) {
+  return marked.parse(markdown);
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Historique de revision</h2>
+        <p>Chaque modification est tracee pour garder la date de mise a jour et l'auteur associe.</p>
+        <div class="code-block"><pre><code>await db("revisions").insert({
+  articleId,
+  author,
+  updatedAt: new Date().toISOString()
+});</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 01</p>
+        <div class="gallery-shot"><img src="/images/doc.jpg" alt="Capture du portail documentaire technique"></div>
+        <p class="gallery-caption">Vue de la base documentaire avec acces rapide aux procedures et guides techniques.</p>
+      </article>
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 02</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Arborescence du portail documentaire">
+            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="48" y="52" width="160" height="42" fill="#171311"></rect>
+            <rect x="48" y="116" width="240" height="34" fill="#efe5d8"></rect>
+            <rect x="48" y="164" width="240" height="34" fill="#efe5d8"></rect>
+            <rect x="48" y="212" width="240" height="34" fill="#efe5d8"></rect>
+            <rect x="318" y="116" width="260" height="176" fill="#fff"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Organisation par categories et zone de lecture pour accelerer la resolution d'incidents.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats et bilan</p>
+        <h2>Bilan du portail</h2>
+        <p>Le portail documentaire a clarifie la circulation de l'information technique dans l'equipe. Cette realisation m'a permis de travailler la structuration de contenu, la recherche d'information et la maintenance d'une base documentaire exploitable au quotidien.</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

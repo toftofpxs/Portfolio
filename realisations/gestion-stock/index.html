@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Gestion de stock">
+  <title>Gestion de stock | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Gestion de stock</p>
+      <p class="eyebrow">/gestion-stock</p>
+      <h1 class="project-title">Gestion de stock</h1>
+      <div class="tag-row">
+        <span>Contexte métier</span>
+        <span>MVC</span>
+        <span>Base de données</span>
+      </div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte détaillé</p>
+        <h2>Objectif du projet</h2>
+        <p>Ce projet répond au besoin d'une petite structure souhaitant suivre ses articles, ses entrées et ses sorties sans passer par des feuilles de calcul dispersées. L'application devait centraliser l'inventaire, fiabiliser les quantités disponibles et signaler les ruptures avant qu'elles ne bloquent l'activité.</p>
+      </article>
+
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats attendus</p>
+        <h2>Ce que la solution apporte</h2>
+        <p>La solution met à disposition un tableau de bord simple, une fiche article structurée, un historique des mouvements et des alertes sur les seuils critiques. L'accent a été mis sur la lisibilité, la cohérence des données et la rapidité de saisie.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes gestion de stock">
+            <rect x="36" y="48" width="170" height="160" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="238" y="28" width="170" height="210" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="80" width="164" height="140" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="56" y="76">Article</text><text x="56" y="108">id</text><text x="56" y="132">reference</text><text x="56" y="156">stock</text><text x="56" y="180">seuilAlerte</text>
+            <text x="258" y="56">Mouvement</text><text x="258" y="88">id</text><text x="258" y="112">type</text><text x="258" y="136">quantite</text><text x="258" y="160">date</text><text x="258" y="184">articleId</text>
+            <text x="460" y="108">Utilisateur</text><text x="460" y="140">id</text><text x="460" y="164">nom</text><text x="460" y="188">role</text>
+            <line x1="206" y1="126" x2="238" y2="126" stroke="#171311"></line>
+            <line x1="408" y1="126" x2="440" y2="126" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Les classes principales structurent l'article, les mouvements de stock et la traçabilité utilisateur.</p>
+      </article>
+
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC gestion de stock">
+            <rect x="50" y="122" width="140" height="90" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="250" y="122" width="140" height="90" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="450" y="122" width="140" height="90" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="106" y="172">View</text><text x="288" y="172">Controller</text><text x="500" y="172">Model</text>
+            <line x1="190" y1="166" x2="250" y2="166" stroke="#171311" marker-end="url(#arrow)"></line>
+            <line x1="390" y1="166" x2="450" y2="166" stroke="#171311" marker-end="url(#arrow)"></line>
+            <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#171311"></path></marker></defs>
+          </svg>
+        </div>
+        <p class="diagram-caption">La vue enregistre l'action, le contrôleur applique la règle métier et le modèle persiste les mouvements.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Validation d'un mouvement</h2>
+        <p>Ce contrôle évite qu'une sortie fasse passer le stock en valeur négative.</p>
+        <div class="code-block"><pre><code>function validateMovement(article, quantity, type) {
+  // Empêche les sorties impossibles avant l'écriture en base.
+  if (type === "OUT" &amp;&amp; article.stock &lt; quantity) {
+    throw new Error("Stock insuffisant");
+  }
+
+  return true;
+}</code></pre></div>
+      </article>
+
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Mise à jour transactionnelle</h2>
+        <p>La quantité est ajustée dans la même opération que l'enregistrement du mouvement pour conserver la cohérence.</p>
+        <div class="code-block"><pre><code>await db.transaction(async (trx) =&gt; {
+  await trx("movements").insert(payload);
+
+  await trx("articles")
+    .where({ id: payload.articleId })
+    .update({ stock: nextStock });
+});</code></pre></div>
+      </article>
+
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Alerte de seuil</h2>
+        <p>Une alerte visuelle est déclenchée dès que le stock disponible passe sous le seuil paramétré.</p>
+        <div class="code-block"><pre><code>const isCritical = article.stock &lt;= article.alertThreshold;
+
+return {
+  ...article,
+  badge: isCritical ? "Alerte stock" : "Stock stable"
+};</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 01</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Tableau de bord stock">
+            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="44" y="48" width="160" height="36" fill="#171311"></rect>
+            <rect x="44" y="112" width="250" height="178" fill="#efe5d8"></rect>
+            <rect x="318" y="112" width="240" height="74" fill="#f1ddd2"></rect>
+            <rect x="318" y="204" width="240" height="86" fill="#efe5d8"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Vue d'ensemble avec état du stock, ruptures et dernières opérations.</p>
+      </article>
+
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 02</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Formulaire de mouvement">
+            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="58" y="64" width="504" height="48" fill="#efe5d8"></rect>
+            <rect x="58" y="136" width="240" height="42" fill="#fff"></rect>
+            <rect x="322" y="136" width="240" height="42" fill="#fff"></rect>
+            <rect x="58" y="204" width="504" height="72" fill="#fff"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Formulaire de saisie pensé pour limiter les erreurs et accélérer les mouvements d'entrée ou de sortie.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats et bilan</p>
+        <h2>Bilan du projet</h2>
+        <p>Le projet a montré l'importance de la cohérence entre règles métier et interface utilisateur. J'ai consolidé mes acquis sur la modélisation, la validation côté service et la clarté d'un flux métier orienté inventaire.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <span>NM</span>
+    <span>© <span data-year></span> Nassim Mezoughi</span>
+    <a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
