@@ -78,10 +78,13 @@ function setupHeader() {
 
 function setupActiveNav() {
   const currentPath = normalizePath(window.location.pathname);
+  const currentHash = window.location.hash;
 
   navLinks.forEach((link) => {
-    const linkPath = normalizePath(new URL(link.href, window.location.origin).pathname);
-    const isActive = linkPath === currentPath;
+    const linkUrl = new URL(link.href, window.location.origin);
+    const linkPath = normalizePath(linkUrl.pathname);
+    const linkHash = linkUrl.hash;
+    const isActive = linkPath === currentPath && (linkHash ? linkHash === currentHash : true);
 
     link.classList.toggle("active", isActive);
 
