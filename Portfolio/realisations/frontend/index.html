@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Frontend">
+  <title>Frontend | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Frontend</p>
+      <p class="eyebrow">/frontend</p>
+      <h1 class="project-title">Frontend</h1>
+      <div class="tag-row"><span>React</span><span>Vite</span><span>UX</span><span>Web app</span></div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte détaillé</p>
+        <h2>Objectif du frontend</h2>
+        <p>Le frontend de la plateforme d'evenements devait proposer un parcours simple: consulter les evenements, s'inscrire, gerer son compte et suivre ses inscriptions. L'enjeu principal etait d'avoir une interface claire pour des utilisateurs non techniques, tout en restant rapide sur mobile et desktop.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats obtenus</p>
+        <h2>Apports concrets</h2>
+        <p>Le projet a abouti a une interface modulaire avec pages dediees (accueil, compte, administration, connexion), des composants reutilisables et une navigation coherente. Les retours utilisateurs ont confirme une meilleure lisibilite des actions et une inscription plus fluide.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes frontend evenementiel">
+            <rect x="40" y="54" width="172" height="152" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="234" y="34" width="182" height="206" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="442" y="84" width="158" height="132" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="58" y="82">UserStore</text><text x="58" y="112">profile</text><text x="58" y="136">token</text>
+            <text x="252" y="62">EventListView</text><text x="252" y="92">events[]</text><text x="252" y="116">filters</text><text x="252" y="140">load()</text>
+            <text x="460" y="112">ApiClient</text><text x="460" y="142">getEvents()</text><text x="460" y="166">subscribe()</text>
+            <line x1="212" y1="126" x2="234" y2="126" stroke="#171311"></line>
+            <line x1="416" y1="126" x2="442" y2="126" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">La vue frontend s'appuie sur un store utilisateur et un client API pour charger les donnees metier.</p>
+      </article>
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC frontend">
+            <rect x="50" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="246" y="120" width="150" height="92" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="442" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="106" y="172">View React</text><text x="292" y="172">Controller</text><text x="490" y="172">Model API</text>
+            <line x1="200" y1="166" x2="246" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="442" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le frontend orchestre les interactions utilisateur via des composants et des appels API centralises.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Chargement des evenements</h2>
+        <p>Ce composant declenche le chargement des evenements au montage et affiche les cartes dynamiquement.</p>
+        <div class="code-block"><pre><code>useEffect(() =&gt; {
+  eventService.list().then(setEvents);
+}, []);
+
+return events.map((event) =&gt; (
+  &lt;EventCard key={event.id} event={event} /&gt;
+));</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Filtrage cote interface</h2>
+        <p>Le filtrage en local rend l'experience plus reactive pour l'utilisateur sans multiplier les appels serveur.</p>
+        <div class="code-block"><pre><code>const filteredEvents = events.filter((event) =&gt; {
+  return selectedCity === "all" || event.city === selectedCity;
+});</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Feedback de soumission</h2>
+        <p>La gestion de statut affiche un retour clair apres l'inscription a un evenement.</p>
+        <div class="code-block"><pre><code>try {
+  await eventService.subscribe(eventId);
+  setNotice("Inscription confirmee");
+} catch (error) {
+  setNotice("Echec de l'inscription");
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 01</p>
+        <div class="gallery-shot">
+          <img src="/images/acueil.jpeg" alt="Vue accueil de la plateforme frontend">
+        </div>
+        <p class="gallery-caption">Page d'accueil avec presentation, evenements a venir et appel a l'action principal.</p>
+      </article>
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 02</p>
+        <div class="gallery-shot">
+          <img src="/images/compte.jpeg" alt="Vue compte utilisateur frontend">
+        </div>
+        <p class="gallery-caption">Espace compte avec informations personnelles et suivi des inscriptions.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats et bilan</p>
+        <h2>Bilan du projet frontend</h2>
+        <p>Ce projet m'a permis de consolider ma maitrise des composants React, de la gestion d'etat et de l'ergonomie orientee utilisateur. J'ai aussi renforce mes reflexes de decoupage UI et de reutilisation des composants pour accelerer les evolutions.</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

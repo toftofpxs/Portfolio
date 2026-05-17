@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - App mobile Hangout">
+  <title>App mobile Hangout | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / App mobile Hangout</p>
+      <p class="eyebrow">/app-mobile-hangout</p>
+      <h1 class="project-title">App mobile Hangout</h1>
+      <div class="tag-row"><span>React Native</span><span>Expo</span><span>API REST</span><span>Mobile</span></div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte detaille</p>
+        <h2>Objectif de l'application</h2>
+        <p>La version mobile du projet Hangout permet aux utilisateurs de consulter des evenements, s'inscrire rapidement et suivre leur activite depuis un smartphone. Le projet devait conserver la logique metier du web tout en proposant une ergonomie tactile adaptee.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats obtenus</p>
+        <h2>Valeur apportee</h2>
+        <p>L'application livre un parcours court et lisible avec authentification, tableau de bord et fiches d'evenements. Les ecrans sont optimises pour l'usage mobile et consomment les routes backend existantes via Axios.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes app mobile Hangout">
+            <rect x="40" y="56" width="166" height="148" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="232" y="34" width="182" height="206" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="442" y="86" width="156" height="128" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="58" y="84">SessionStore</text><text x="58" y="114">token</text><text x="58" y="138">user</text>
+            <text x="250" y="62">EventScreen</text><text x="250" y="92">events[]</text><text x="250" y="116">loading</text><text x="250" y="140">refresh()</text>
+            <text x="460" y="114">ApiClient</text><text x="460" y="144">login()</text><text x="460" y="168">fetchEvents()</text>
+            <line x1="206" y1="126" x2="232" y2="126" stroke="#171311"></line>
+            <line x1="414" y1="126" x2="442" y2="126" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">L'app mobile combine un store de session, des ecrans fonctionnels et un client API partage.</p>
+      </article>
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC app mobile">
+            <rect x="52" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="246" y="120" width="150" height="92" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="102" y="172">Screens</text><text x="292" y="172">Controller</text><text x="492" y="172">Services</text>
+            <line x1="202" y1="166" x2="246" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="440" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Les ecrans React Native deleguent les actions a des services qui consomment l'API backend.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Connexion utilisateur</h2>
+        <p>Le token recu a la connexion est stocke pour authentifier les appels suivants.</p>
+        <div class="code-block"><pre><code>const response = await axios.post("/login", credentials);
+await SecureStore.setItemAsync("token", response.data.token);
+setSession(response.data.profile);</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Recuperation des evenements</h2>
+        <p>Le hook recharge la liste en conservant un etat de chargement visible.</p>
+        <div class="code-block"><pre><code>const loadEvents = async () =&gt; {
+  setLoading(true);
+  const { data } = await api.get("/events");
+  setEvents(data);
+  setLoading(false);
+};</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Inscription a un evenement</h2>
+        <p>Le bouton met a jour l'interface apres confirmation de l'API.</p>
+        <div class="code-block"><pre><code>await api.post(`/events/${eventId}/register`);
+setEvents((prev) =&gt; prev.map((item) =&gt;
+  item.id === eventId ? { ...item, isRegistered: true } : item
+));</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 01</p>
+        <div class="gallery-shot">
+          <img src="/images/WhatsApp Image 2026-03-22 at 16.36.10.jpeg" alt="Capture de l'application mobile Hangout">
+        </div>
+        <p class="gallery-caption">Ecran principal de l'application avec navigation, compte utilisateur et evenements.</p>
+      </article>
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'ecran 02</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Schema des ecrans mobiles">
+            <rect x="48" y="30" width="150" height="300" rx="18" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="236" y="30" width="150" height="300" rx="18" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="424" y="30" width="150" height="300" rx="18" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="72" y="64" width="102" height="26" fill="#171311"></rect>
+            <rect x="260" y="64" width="102" height="26" fill="#171311"></rect>
+            <rect x="448" y="64" width="102" height="26" fill="#171311"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Parcours mobile de connexion, liste d'evenements et vue detail d'inscription.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats et bilan</p>
+        <h2>Bilan du projet mobile</h2>
+        <p>Cette realisation m'a appris a adapter une logique web au mobile sans perdre la coherence metier. J'ai renforce mes competences sur React Native, la gestion de session et l'optimisation des ecrans pour une lecture rapide.</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

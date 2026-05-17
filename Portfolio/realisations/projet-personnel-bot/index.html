@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Projet personnel bot">
+  <title>Projet personnel bot | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Projet personnel bot</p>
+      <p class="eyebrow">/projet-personnel-bot</p>
+      <h1 class="project-title">Projet personnel bot</h1>
+      <div class="tag-row">
+        <span>Automatisation</span>
+        <span>Commandes</span>
+        <span>Journalisation</span>
+      </div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte détaillé</p>
+        <h2>Objectif du projet</h2>
+        <p>Ce projet personnel avait pour but d'explorer la conception d'un bot capable de déclencher des commandes utiles, d'interroger des services externes et de conserver un historique des actions exécutées. L'idée était de pratiquer l'automatisation dans un cadre concret.</p>
+      </article>
+
+      <article class="page-panel reveal">
+        <p class="eyebrow">Périmètre</p>
+        <h2>Cas d'usage ciblés</h2>
+        <p>Le bot doit répondre à des commandes simples, formater les réponses de manière lisible et éviter les actions silencieuses. La priorité a été donnée à la traçabilité, à la robustesse et à la séparation entre commandes, services et logs.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Diagramme de classes</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Diagramme de classes bot">
+            <rect x="40" y="54" width="164" height="150" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="232" y="34" width="184" height="206" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="446" y="82" width="150" height="136" fill="#f8f4ef" stroke="#171311"></rect>
+            <text x="58" y="82">Command</text><text x="58" y="114">name</text><text x="58" y="138">description</text>
+            <text x="252" y="62">Execution</text><text x="252" y="94">id</text><text x="252" y="118">commandName</text><text x="252" y="142">status</text><text x="252" y="166">startedAt</text>
+            <text x="464" y="110">LogEntry</text><text x="464" y="142">id</text><text x="464" y="166">level</text><text x="464" y="190">message</text>
+            <line x1="204" y1="126" x2="232" y2="126" stroke="#171311"></line>
+            <line x1="416" y1="126" x2="446" y2="126" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Les commandes déclenchent des exécutions qui sont ensuite journalisées pour garder une trace exploitable.</p>
+      </article>
+
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC bot">
+            <rect x="46" y="118" width="154" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="244" y="118" width="154" height="94" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="442" y="118" width="154" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="88" y="170">Command UI</text><text x="288" y="170">Controller</text><text x="494" y="170">Services</text>
+            <line x1="200" y1="166" x2="244" y2="166" stroke="#171311"></line>
+            <line x1="398" y1="166" x2="442" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">L'interface de commande délègue l'action au contrôleur, qui appelle les services et journalise le résultat.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Registre de commandes</h2>
+        <p>Le registre associe un nom de commande à une fonction dédiée pour garder un point d'entrée lisible.</p>
+        <div class="code-block"><pre><code>const commands = {
+  ping: handlePing,
+  summary: handleSummary,
+  help: handleHelp
+};</code></pre></div>
+      </article>
+
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Journalisation</h2>
+        <p>Chaque exécution est loggée pour garder un historique utile au débogage et au suivi du bot.</p>
+        <div class="code-block"><pre><code>logger.info({
+  command: input.name,
+  user: input.userId,
+  status: "started"
+});</code></pre></div>
+      </article>
+
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Réponse sécurisée</h2>
+        <p>Le bot renvoie un message explicite en cas d'échec pour éviter une expérience silencieuse côté utilisateur.</p>
+        <div class="code-block"><pre><code>try {
+  return await commands[input.name](input);
+} catch (error) {
+  return { message: "Commande indisponible pour le moment." };
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 01</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Console de bot">
+            <rect x="18" y="18" width="584" height="324" fill="#171311" stroke="#171311"></rect>
+            <rect x="42" y="44" width="536" height="270" fill="#1f1a17"></rect>
+            <rect x="58" y="66" width="160" height="18" fill="#c24d22"></rect>
+            <rect x="58" y="108" width="460" height="10" fill="#efe5d8"></rect>
+            <rect x="58" y="136" width="420" height="10" fill="#efe5d8"></rect>
+            <rect x="58" y="190" width="240" height="10" fill="#f1ddd2"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Simulation d'une console de commandes avec retours formatés et journalisation visible.</p>
+      </article>
+
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 02</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Tableau d'exécutions du bot">
+            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="44" y="54" width="532" height="42" fill="#171311"></rect>
+            <rect x="44" y="116" width="532" height="38" fill="#efe5d8"></rect>
+            <rect x="44" y="170" width="532" height="38" fill="#fff"></rect>
+            <rect x="44" y="224" width="532" height="38" fill="#efe5d8"></rect>
+          </svg>
+        </div>
+        <p class="gallery-caption">Historique des exécutions pour suivre les commandes réussies, échouées et leur contexte.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats et bilan</p>
+        <h2>Bilan du projet</h2>
+        <p>Ce projet personnel m'a servi de terrain d'expérimentation pour l'automatisation, la structuration de commandes et la robustesse des retours utilisateurs. Il m'a permis de mieux penser la séparation entre orchestration, services et logs.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer shell">
+    <span>NM</span>
+    <span>© <span data-year></span> Nassim Mezoughi</span>
+    <a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a>
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
