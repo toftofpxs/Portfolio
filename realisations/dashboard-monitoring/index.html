@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Dashboard de monitoring">
+  <title>Dashboard de monitoring | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Dashboard de monitoring</p>
+      <p class="eyebrow">/dashboard-monitoring</p>
+      <h1 class="project-title">Dashboard de monitoring</h1>
+      <div class="tag-row"><span>Java</span><span>Supervision</span><span>Système</span><span>SQL</span></div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte détaillé</p>
+        <h2>Objectif du dashboard</h2>
+        <p>En première année de BTS SIO, j'ai participé à la création d'un dashboard de supervision système. L'objectif principal était de surveiller l'état du système d'information en temps réel, d'identifier les anomalies et de faciliter la prise de décision des équipes d'exploitation.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats obtenus</p>
+        <h2>Apports concrets</h2>
+        <p>Le dashboard a été intégré avec succès dans l'outil interne de monitoring et permet à l'équipe d'exploitation de suivre les métriques critiques du SI. Les alertes sont correctement remontées et les données sont présentées de manière accessible et lisible.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture du système</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture monitoring Java">
+            <rect x="50" y="40" width="130" height="80" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="240" y="40" width="130" height="80" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="430" y="40" width="130" height="80" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="145" y="160" width="130" height="80" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="335" y="160" width="130" height="80" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="75" y="85">Collecteurs</text>
+            <text x="265" y="85">Dashboard</text>
+            <text x="455" y="85">Alertes</text>
+            <text x="165" y="205">Base SQL</text>
+            <text x="355" y="205">Logs</text>
+            <line x1="115" y1="120" x2="180" y2="160" stroke="#171311"></line>
+            <line x1="305" y1="120" x2="305" y2="160" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le dashboard collecte les métriques système, les stocke en SQL et génère des alertes en cas d'anomalie.</p>
+      </article>
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Flux de données</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Flux de données monitoring">
+            <circle cx="100" cy="180" r="40" fill="#f8f4ef" stroke="#171311"></circle>
+            <circle cx="320" cy="180" r="40" fill="#efe5d8" stroke="#171311"></circle>
+            <circle cx="540" cy="180" r="40" fill="#f8f4ef" stroke="#171311"></circle>
+            <text x="80" y="185">Serveurs</text>
+            <text x="300" y="185">Traitement</text>
+            <text x="520" y="185">Affichage</text>
+            <line x1="140" y1="180" x2="280" y2="180" stroke="#171311" marker-end="url(#arrow)"></line>
+            <line x1="360" y1="180" x2="500" y2="180" stroke="#171311" marker-end="url(#arrow)"></line>
+            <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#171311"></path></marker></defs>
+          </svg>
+        </div>
+        <p class="diagram-caption">Les données circulent des serveurs vers le dashboard via des requêtes SQL et des appels planifiés.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Collecte de métriques</h2>
+        <p>Le collecteur interroge les serveurs pour récupérer les états en temps réel.</p>
+        <div class="code-block"><pre><code>public List&lt;SystemMetric&gt; collectMetrics() {
+  List&lt;SystemMetric&gt; metrics = new ArrayList&lt;&gt;();
+  for (Server server : servers) {
+    SystemMetric m = fetchMetric(server);
+    metrics.add(m);
+  }
+  return metrics;
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Enregistrement en base</h2>
+        <p>Les métriques sont stockées en SQL pour garder un historique et créer des alertes.</p>
+        <div class="code-block"><pre><code>public void storeMetric(SystemMetric metric) {
+  String sql = "INSERT INTO metrics (serverId, cpu, memory, timestamp) VALUES (?, ?, ?, ?)";
+  preparedStatement.setInt(1, metric.getServerId());
+  preparedStatement.setDouble(2, metric.getCpuUsage());
+  preparedStatement.executeUpdate();
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Génération d'alertes</h2>
+        <p>Si une métrique dépasse le seuil critique, une alerte est générée et affichée.</p>
+        <div class="code-block"><pre><code>if (metric.getCpuUsage() > CRITICAL_THRESHOLD) {
+  Alert alert = new Alert("Cpu critique sur " + serverId);
+  alertService.send(alert);
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Capture d'écran 01</p>
+        <div class="gallery-shot">
+          <img src="/images/Dynatrace-01.png" alt="Vue du dashboard de monitoring">
+        </div>
+        <p class="gallery-caption">Dashboard affichant les états des serveurs avec code couleur et alertes actives.</p>
+      </article>
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Vue synthèse</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Synthèse monitoring">
+            <rect x="40" y="30" width="280" height="300" fill="#f7f2ea" stroke="#171311"></rect>
+            <rect x="340" y="30" width="240" height="300" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="60" y="60">Services actifs: 12</text>
+            <text x="60" y="90">Alertes: 2</text>
+            <text x="60" y="120">Uptime: 99.8%</text>
+            <text x="360" y="60">Dernière mise à jour: 15:42</text>
+            <text x="360" y="90">CPU moyen: 45%</text>
+            <text x="360" y="120">Mémoire: 68%</text>
+          </svg>
+        </div>
+        <p class="gallery-caption">Vue synthétique des indicateurs clés du SI avec dernière mise à jour.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats et bilan</p>
+        <h2>Bilan du projet monitoring</h2>
+        <p>Ce projet de 1ère année m'a permis de débuter mes compétences en Java, en gestion de bases de données SQL et en conception de systèmes de supervision. J'ai compris l'importance de la collecte de données en temps réel et comment présenter les informations critiques de manière lisible pour les équipes d'exploitation.</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

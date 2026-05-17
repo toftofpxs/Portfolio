@@ -14,6 +14,9 @@ export default defineConfig({
         appMobileHangout: resolve(__dirname, "realisations/app-mobile-hangout/index.html"),
         dashboardMonitoringDynatrace: resolve(__dirname, "realisations/dashboard-monitoring-dynatrace/index.html"),
         portailDocumentaire: resolve(__dirname, "realisations/portail-documentaire/index.html"),
+        portfolioPersonnel: resolve(__dirname, "realisations/portfolio-personnel/index.html"),
+        dashboardMonitoring: resolve(__dirname, "realisations/dashboard-monitoring/index.html"),
+        outilExcel: resolve(__dirname, "realisations/outil-excel/index.html"),
         veille: resolve(__dirname, "veille/index.html"),
         contact: resolve(__dirname, "contact/index.html")
       }

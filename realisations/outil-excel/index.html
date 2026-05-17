@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Outil de tri de fichiers Excel">
+  <title>Outil de tri de fichiers Excel | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Compétences</a>
+        <a data-nav-link href="/realisations/">Réalisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Réalisations</a> / Outil de tri de fichiers Excel</p>
+      <p class="eyebrow">/outil-excel</p>
+      <h1 class="project-title">Outil de tri de fichiers Excel</h1>
+      <div class="tag-row"><span>Web app</span><span>SheetJS</span><span>Automatisation</span><span>Performance</span></div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte détaillé</p>
+        <h2>Objectif de l'outil</h2>
+        <p>En alternance 2ème année, l'équipe devait traiter régulièrement de gros fichiers Excel volumineux avec des opérations répétitives de tri et filtrage. L'objectif était de développer un outil web capable d'automatiser ces tâches et de réduire drastiquement le temps de traitement manuel des données.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats obtenus</p>
+        <h2>Apports concrets</h2>
+        <p>L'outil a été déployé et permet aux utilisateurs de charger des fichiers Excel directement dans le navigateur, d'appliquer des filtres et des tris complexes en quelques secondes, et d'exporter le résultat. Cela a réduit le temps de traitement de plusieurs heures à quelques minutes.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Flux de traitement</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Flux de traitement Excel">
+            <rect x="50" y="80" width="110" height="80" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="210" y="80" width="110" height="80" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="370" y="80" width="110" height="80" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="530" y="80" width="60" height="80" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="75" y="130">Chargement</text>
+            <text x="225" y="130">Parsing</text>
+            <text x="390" y="130">Filtrage</text>
+            <text x="540" y="130">Export</text>
+            <line x1="160" y1="120" x2="210" y2="120" stroke="#171311" marker-end="url(#arrow)"></line>
+            <line x1="320" y1="120" x2="370" y2="120" stroke="#171311" marker-end="url(#arrow)"></line>
+            <line x1="480" y1="120" x2="530" y2="120" stroke="#171311" marker-end="url(#arrow)"></line>
+            <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#171311"></path></marker></defs>
+          </svg>
+        </div>
+        <p class="diagram-caption">Le fichier est chargé, parsé côté client, filtré puis exporté sans communication serveur.</p>
+      </article>
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC Excel">
+            <rect x="50" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="246" y="120" width="150" height="92" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="442" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="90" y="172">Vue HTML</text>
+            <text x="280" y="172">Contrôleur JS</text>
+            <text x="480" y="172">Données Excel</text>
+            <line x1="200" y1="166" x2="246" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="442" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">L'interface permet à l'utilisateur de configurer les filtres qui sont appliqués au modèle de données.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Chargement du fichier Excel</h2>
+        <p>SheetJS permet de parser le fichier directement en JavaScript sans passer par le serveur.</p>
+        <div class="code-block"><pre><code>function handleFileUpload(event) {
+  const file = event.target.files[0];
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const workbook = XLSX.read(e.target.result, {type: 'array'});
+    const data = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+    displayTable(data);
+  };
+  reader.readAsArrayBuffer(file);
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Filtrage en temps réel</h2>
+        <p>Les filtres s'appliquent instantanément sans délai de traitement serveur.</p>
+        <div class="code-block"><pre><code>function applyFilters(data, filters) {
+  return data.filter(row => {
+    return filters.every(f => 
+      row[f.column]?.toString().toLowerCase().includes(f.value.toLowerCase())
+    );
+  });
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Export du résultat</h2>
+        <p>Le fichier filtré est exporté en Excel avec la même structure que l'original.</p>
+        <div class="code-block"><pre><code>function exportToExcel(filteredData) {
+  const ws = XLSX.utils.json_to_sheet(filteredData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Données");
+  XLSX.writeFile(wb, "resultat_filtré.xlsx");
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="gallery-grid page-section">
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Interface principale</p>
+        <div class="gallery-shot">
+          <img src="/images/outil-excel.png" alt="Interface de l'outil de tri de fichiers Excel">
+        </div>
+        <p class="gallery-caption">Interface fonctionnelle permettant de charger des fichiers Excel, appliquer des filtres et exporter les résultats.</p>
+      </article>
+      <article class="gallery-card reveal">
+        <p class="eyebrow">Performance</p>
+        <div class="gallery-shot">
+          <svg viewBox="0 0 620 360" role="img" aria-label="Comparaison de performance">
+            <text x="40" y="60" font-weight="bold">Avant (manuel en Excel)</text>
+            <text x="40" y="100">Taille du fichier: 50 MB</text>
+            <text x="40" y="130">Temps de traitement: 2-3 heures</text>
+            <text x="40" y="160">Risque d'erreur: Élevé</text>
+            <line x1="40" y1="190" x2="580" y2="190" stroke="#999"></line>
+            <text x="40" y="220" font-weight="bold">Après (outil web)</text>
+            <text x="40" y="260">Taille du fichier: 50 MB</text>
+            <text x="40" y="290">Temps de traitement: 5-10 secondes</text>
+            <text x="40" y="320">Risque d'erreur: Minimal</text>
+          </svg>
+        </div>
+        <p class="gallery-caption">Comparaison avant/après montrant le gain de temps et la réduction des erreurs.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Résultats et bilan</p>
+        <h2>Bilan de l'outil Excel</h2>
+        <p>Ce projet m'a enseigné comment développer des outils pratiques qui résolvent des problèmes réels en entreprise. J'ai maîtrisé SheetJS pour manipuler les fichiers Excel côté client, optimisé les performances pour traiter des fichiers volumineux, et créé une interface utilisateur intuitive qui réduit le besoin de formation.</p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

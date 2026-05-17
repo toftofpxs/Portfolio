@@ -225,6 +225,8 @@ main {
 .page-title {
   font-size: clamp(2.6rem, 8vw, 5.7rem);
   line-height: 0.95;
+  overflow: hidden;
+  word-break: break-word;
 }
 
 .section-title,
@@ -589,6 +591,24 @@ main {
 .project-download:hover,
 .project-download:focus-visible {
   color: var(--accent);
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 0.95rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #425164;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-link:hover,
+.project-link:focus-visible {
+  color: var(--accent);
+  outline: none;
 }
 
 .svg-frame,
