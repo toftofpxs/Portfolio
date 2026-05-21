@@ -17,6 +17,7 @@ export default defineConfig({
         portfolioPersonnel: resolve(__dirname, "realisations/portfolio-personnel/index.html"),
         dashboardMonitoring: resolve(__dirname, "realisations/dashboard-monitoring/index.html"),
         outilExcel: resolve(__dirname, "realisations/outil-excel/index.html"),
+        glossaireVocabulaireAxa: resolve(__dirname, "realisations/glossaire-vocabulaire-axa/index.html"),
         veille: resolve(__dirname, "veille/index.html"),
         contact: resolve(__dirname, "contact/index.html")
       }

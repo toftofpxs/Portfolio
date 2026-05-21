@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Réalisation détaillée - Glossaire Vocabulaire AXA">
+  <title>Glossaire Vocabulaire AXA | Nassim Mezoughi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="/images/N.png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="realisations">
+  <header class="site-header">
+    <nav class="nav shell" aria-label="Navigation principale">
+      <a class="nav-logo" href="/">NM</a>
+      <button class="nav-burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Ouvrir le menu"></button>
+      <div class="nav-links" id="menu">
+        <a data-nav-link href="/">Accueil</a>
+        <a data-nav-link href="/parcours/">Parcours</a>
+        <a data-nav-link href="/competences/">Competences</a>
+        <a data-nav-link href="/realisations/">Realisations</a>
+        <a data-nav-link href="/veille/">Veille</a>
+        <a data-nav-link href="/contact/">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="page-section page-header reveal">
+      <p class="breadcrumb"><a href="/">Accueil</a> / <a href="/realisations/">Realisations</a> / Glossaire Vocabulaire AXA</p>
+      <p class="eyebrow">/glossaire-vocabulaire-axa</p>
+      <h1 class="project-title">Glossaire Vocabulaire AXA</h1>
+      <div class="tag-row"><span>Entreprise</span><span>AXA</span><span>Glossaire</span><span>Documentation</span></div>
+    </section>
+
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Contexte detaille</p>
+        <h2>Besoin de standardisation</h2>
+        <p>Au sein de l'equipe chez AXA, de nombreux acronymes, termes metiers et expressions techniques etaient utilises de facon heterogene selon les interlocuteurs. L'objectif etait de recenser l'ensemble de ce vocabulaire, de le structurer par domaine et de le rendre consultable facilement pour faciliter l'integration et la communication interne.</p>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats obtenus</p>
+        <h2>Un referentiel vivant</h2>
+        <p>Le glossaire regroupe les termes techniques, metiers et organisationnels classes par categorie. Chaque entree inclut une definition claire, des exemples d'usage et des liens vers les ressources associees. L'outil est maintenu et enrichi au fil des nouveaux besoins identifies en equipe.</p>
+      </article>
+    </section>
+
+    <section class="diagram-grid page-section">
+      <article class="diagram-card reveal">
+        <p class="eyebrow">Architecture MVC</p>
+        <div class="svg-frame">
+          <svg viewBox="0 0 640 360" role="img" aria-label="Architecture MVC glossaire AXA">
+            <rect x="52" y="118" width="150" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <rect x="246" y="118" width="150" height="94" fill="#f8f4ef" stroke="#171311"></rect>
+            <rect x="440" y="118" width="150" height="94" fill="#efe5d8" stroke="#171311"></rect>
+            <text x="127" y="165" text-anchor="middle" dominant-baseline="middle">Pages</text>
+            <text x="321" y="165" text-anchor="middle" dominant-baseline="middle">Controller</text>
+            <text x="515" y="165" text-anchor="middle" dominant-baseline="middle">Glossaire</text>
+            <line x1="202" y1="166" x2="246" y2="166" stroke="#171311"></line>
+            <line x1="396" y1="166" x2="440" y2="166" stroke="#171311"></line>
+          </svg>
+        </div>
+        <p class="diagram-caption">Les pages de consultation sont servies par un controleur qui interroge la base du glossaire.</p>
+      </article>
+    </section>
+
+    <section class="code-grid page-section">
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 01</p>
+        <h2>Recherche d'un terme</h2>
+        <p>La fonction de recherche filtre les termes en temps reel sur le label et la definition.</p>
+        <div class="code-block"><pre><code>function searchTerms(query, terms) {
+  const q = query.toLowerCase();
+  return terms.filter((term) =>
+    term.label.toLowerCase().includes(q) ||
+    term.definition.toLowerCase().includes(q)
+  );
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 02</p>
+        <h2>Rendu d'une entree</h2>
+        <p>Chaque entree est generee dynamiquement depuis les donnees du glossaire.</p>
+        <div class="code-block"><pre><code>function renderTerm(term) {
+  return `
+    &lt;dt class="term-label"&gt;${term.label}&lt;/dt&gt;
+    &lt;dd class="term-def"&gt;${term.definition}&lt;/dd&gt;
+    &lt;dd class="term-example"&gt;${term.example}&lt;/dd&gt;
+  `;
+}</code></pre></div>
+      </article>
+      <article class="code-card reveal">
+        <p class="eyebrow">Extrait de code 03</p>
+        <h2>Filtrage par categorie</h2>
+        <p>Le filtre par domaine permet d'isoler les termes metiers, techniques ou organisationnels.</p>
+        <div class="code-block"><pre><code>function filterByCategory(terms, categoryId) {
+  if (!categoryId) return terms;
+  return terms.filter(
+    (term) => term.categoryId === categoryId
+  );
+}</code></pre></div>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Resultats et bilan</p>
+        <h2>Bilan du projet</h2>
+        <p>Ce projet m'a permis de travailler la structuration de contenu et la gestion d'une base documentaire maintenable. La rigueur de definition des termes et la collaboration avec les membres de l'equipe m'ont appris a allier technique et communication metier dans un contexte professionnel exigeant.</p>
+      </article>
+    </section>
+
+    <section class="page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Methode de travail</p>
+        <h2>Organisation Scrum Agile</h2>
+        <div class="bullet-list">
+          <p><strong>Sprint 1 :</strong> recensement des besoins, identification des domaines metiers, structuration du schema de donnees et mise en place de l'environnement de contribution.</p>
+          <p><strong>Sprint 2 :</strong> saisie et validation des termes metiers avec l'equipe, developpement de l'interface de consultation et mise en ligne d'une premiere version utilisable.</p>
+          <p><strong>Sprint 3 :</strong> enrichissement continu du glossaire, correction des definitions validees en equipe, ajout du filtrage par domaine et stabilisation de l'outil.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer shell"><span>NM</span><span>&copy; <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -14,6 +14,7 @@ export default defineConfig({
         appMobileHangout: resolve(__dirname, "realisations/app-mobile-hangout/index.html"),
         dashboardMonitoringDynatrace: resolve(__dirname, "realisations/dashboard-monitoring-dynatrace/index.html"),
         portailDocumentaire: resolve(__dirname, "realisations/portail-documentaire/index.html"),
+        glossaireVocabulaireAxa: resolve(__dirname, "realisations/glossaire-vocabulaire-axa/index.html"),
         veille: resolve(__dirname, "veille/index.html"),
         contact: resolve(__dirname, "contact/index.html")
       }

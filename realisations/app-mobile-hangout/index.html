@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -150,8 +150,31 @@ setEvents((prev) =&gt; prev.map((item) =&gt;
         <p>Cette realisation m'a appris a adapter une logique web au mobile sans perdre la coherence metier. J'ai renforce mes competences sur React Native, la gestion de session et l'optimisation des ecrans pour une lecture rapide.</p>
       </article>
     </section>
+  
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Sprints du projet</p>
+        <h2>Organisation Kanban (solo)</h2>
+        <div class="bullet-list">
+          <p><strong>Sprint 1:</strong> initialisation de l'app Expo, navigation mobile et creation des ecrans principaux (connexion, accueil, details evenement).</p>
+          <p><strong>Sprint 2:</strong> integration des appels API (authentification, consultation et inscription aux evenements) avec gestion des sessions.</p>
+          <p><strong>Sprint 3:</strong> optimisation de l'interface mobile (ergonomie, performances), tests sur appareil mobile (Expo Go) et corrections finales.</p>
+        </div>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Conformite RGPD</p>
+        <h2>Articles appliques</h2>
+        <div class="bullet-list">
+          <p><strong>Art. 5 §1 c) :</strong> principe de minimisation des donnees — l'application mobile ne collecte et ne transmet que les informations strictement necessaires (email, session token), sans acces aux contacts, localisation ou autre donnee hors perimetre.</p>
+          <p><strong>Art. 32 §1 b) :</strong> securite du traitement assuree par le stockage du token d'authentification dans le SecureStore natif d'Expo (chiffre par l'OS), et par le recours exclusif a HTTPS pour tous les appels API.</p>
+          <p><strong>Art. 13 §2 a) :</strong> la duree de conservation des donnees de session est communiquee lors du premier lancement de l'application, conformement a l'obligation d'information au moment de la collecte.</p>
+          <p><strong>Art. 20 §1 :</strong> droit a la portabilite pris en compte — les donnees de l'utilisateur (profil, inscriptions) sont disponibles via l'API dans un format structure (JSON) permettant une exportation a la demande.</p>
+        </div>
+      </article>
+    </section>
   </main>
   <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
   <script type="module" src="/app.js"></script>
 </body>
 </html>
+

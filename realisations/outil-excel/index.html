@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -57,10 +57,10 @@
             <rect x="210" y="80" width="110" height="80" fill="#efe5d8" stroke="#171311"></rect>
             <rect x="370" y="80" width="110" height="80" fill="#f8f4ef" stroke="#171311"></rect>
             <rect x="530" y="80" width="60" height="80" fill="#efe5d8" stroke="#171311"></rect>
-            <text x="75" y="130">Chargement</text>
-            <text x="225" y="130">Parsing</text>
-            <text x="390" y="130">Filtrage</text>
-            <text x="540" y="130">Export</text>
+            <text x="105" y="120" text-anchor="middle" dominant-baseline="middle">Chargement</text>
+            <text x="265" y="120" text-anchor="middle" dominant-baseline="middle">Parsing</text>
+            <text x="425" y="120" text-anchor="middle" dominant-baseline="middle">Filtrage</text>
+            <text x="560" y="120" text-anchor="middle" dominant-baseline="middle">Export</text>
             <line x1="160" y1="120" x2="210" y2="120" stroke="#171311" marker-end="url(#arrow)"></line>
             <line x1="320" y1="120" x2="370" y2="120" stroke="#171311" marker-end="url(#arrow)"></line>
             <line x1="480" y1="120" x2="530" y2="120" stroke="#171311" marker-end="url(#arrow)"></line>
@@ -76,55 +76,14 @@
             <rect x="50" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
             <rect x="246" y="120" width="150" height="92" fill="#f8f4ef" stroke="#171311"></rect>
             <rect x="442" y="120" width="150" height="92" fill="#efe5d8" stroke="#171311"></rect>
-            <text x="90" y="172">Vue HTML</text>
-            <text x="280" y="172">Contrôleur JS</text>
-            <text x="480" y="172">Données Excel</text>
+            <text x="125" y="166" text-anchor="middle" dominant-baseline="middle">Vue HTML</text>
+            <text x="321" y="166" text-anchor="middle" dominant-baseline="middle">Contrôleur JS</text>
+            <text x="517" y="166" text-anchor="middle" dominant-baseline="middle">Données Excel</text>
             <line x1="200" y1="166" x2="246" y2="166" stroke="#171311"></line>
             <line x1="396" y1="166" x2="442" y2="166" stroke="#171311"></line>
           </svg>
         </div>
         <p class="diagram-caption">L'interface permet à l'utilisateur de configurer les filtres qui sont appliqués au modèle de données.</p>
-      </article>
-    </section>
-
-    <section class="code-grid page-section">
-      <article class="code-card reveal">
-        <p class="eyebrow">Extrait de code 01</p>
-        <h2>Chargement du fichier Excel</h2>
-        <p>SheetJS permet de parser le fichier directement en JavaScript sans passer par le serveur.</p>
-        <div class="code-block"><pre><code>function handleFileUpload(event) {
-  const file = event.target.files[0];
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    const workbook = XLSX.read(e.target.result, {type: 'array'});
-    const data = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
-    displayTable(data);
-  };
-  reader.readAsArrayBuffer(file);
-}</code></pre></div>
-      </article>
-      <article class="code-card reveal">
-        <p class="eyebrow">Extrait de code 02</p>
-        <h2>Filtrage en temps réel</h2>
-        <p>Les filtres s'appliquent instantanément sans délai de traitement serveur.</p>
-        <div class="code-block"><pre><code>function applyFilters(data, filters) {
-  return data.filter(row => {
-    return filters.every(f => 
-      row[f.column]?.toString().toLowerCase().includes(f.value.toLowerCase())
-    );
-  });
-}</code></pre></div>
-      </article>
-      <article class="code-card reveal">
-        <p class="eyebrow">Extrait de code 03</p>
-        <h2>Export du résultat</h2>
-        <p>Le fichier filtré est exporté en Excel avec la même structure que l'original.</p>
-        <div class="code-block"><pre><code>function exportToExcel(filteredData) {
-  const ws = XLSX.utils.json_to_sheet(filteredData);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Données");
-  XLSX.writeFile(wb, "resultat_filtré.xlsx");
-}</code></pre></div>
       </article>
     </section>
 
@@ -162,8 +121,22 @@
         <p>Ce projet m'a enseigné comment développer des outils pratiques qui résolvent des problèmes réels en entreprise. J'ai maîtrisé SheetJS pour manipuler les fichiers Excel côté client, optimisé les performances pour traiter des fichiers volumineux, et créé une interface utilisateur intuitive qui réduit le besoin de formation.</p>
       </article>
     </section>
+  
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Sprints du projet</p>
+        <h2>Organisation Scrum Agile</h2>
+        <div class="bullet-list">
+          <p><strong>Sprint 1:</strong> mise en place de la logique metier (lecture du fichier Excel, parsing des donnees et regles de filtrage/tri).</p>
+          <p><strong>Sprint 2:</strong> ajout des operations CRUD sur les lignes (ajouter, modifier, supprimer et sauvegarder les donnees traitees).</p>
+          <p><strong>Sprint 3:</strong> creation et finalisation de l'interface utilisateur (ecrans, interactions, ergonomie et tests de validation).</p>
+        </div>
+      </article>
+    </section>
   </main>
   <footer class="site-footer shell"><span>NM</span><span>© <span data-year></span> Nassim Mezoughi</span><a href="mailto:nassimmezoughi5@gmail.com">nassimmezoughi5@gmail.com</a></footer>
   <script type="module" src="/app.js"></script>
 </body>
 </html>
+
+

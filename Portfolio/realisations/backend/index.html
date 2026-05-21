@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -77,7 +77,7 @@
             <rect x="52" y="118" width="150" height="94" fill="#efe5d8" stroke="#171311"></rect>
             <rect x="246" y="118" width="150" height="94" fill="#f8f4ef" stroke="#171311"></rect>
             <rect x="440" y="118" width="150" height="94" fill="#efe5d8" stroke="#171311"></rect>
-            <text x="98" y="170">Routes</text><text x="286" y="170">Controllers</text><text x="492" y="170">Models</text>
+            <text x="127" y="165" text-anchor="middle" dominant-baseline="middle">Routes</text><text x="321" y="165" text-anchor="middle" dominant-baseline="middle">Controllers</text><text x="515" y="165" text-anchor="middle" dominant-baseline="middle">Models</text>
             <line x1="202" y1="166" x2="246" y2="166" stroke="#171311"></line>
             <line x1="396" y1="166" x2="440" y2="166" stroke="#171311"></line>
           </svg>
@@ -126,39 +126,33 @@
       </article>
     </section>
 
-    <section class="gallery-grid page-section">
-      <article class="gallery-card reveal">
-        <p class="eyebrow">Capture d'ecran 01</p>
-        <div class="gallery-shot">
-          <svg viewBox="0 0 620 360" role="img" aria-label="Documentation des routes backend">
-            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
-            <rect x="46" y="52" width="528" height="36" fill="#171311"></rect>
-            <rect x="46" y="108" width="528" height="42" fill="#efe5d8"></rect>
-            <rect x="46" y="166" width="528" height="42" fill="#f1ddd2"></rect>
-            <rect x="46" y="224" width="528" height="42" fill="#efe5d8"></rect>
-          </svg>
-        </div>
-        <p class="gallery-caption">Vue de la documentation des endpoints utilises par le frontend et l'app mobile.</p>
-      </article>
-      <article class="gallery-card reveal">
-        <p class="eyebrow">Capture d'ecran 02</p>
-        <div class="gallery-shot">
-          <svg viewBox="0 0 620 360" role="img" aria-label="Schema de base de donnees backend">
-            <rect x="18" y="18" width="584" height="324" fill="#f7f2ea" stroke="#171311"></rect>
-            <rect x="50" y="64" width="150" height="112" fill="#fff" stroke="#171311"></rect>
-            <rect x="234" y="44" width="150" height="164" fill="#fff" stroke="#171311"></rect>
-            <rect x="418" y="94" width="150" height="102" fill="#fff" stroke="#171311"></rect>
-          </svg>
-        </div>
-        <p class="gallery-caption">Schema de donnees simplifie pour expliquer les relations entre les tables metier.</p>
-      </article>
-    </section>
-
     <section class="page-section">
       <article class="page-panel reveal">
         <p class="eyebrow">Resultats et bilan</p>
         <h2>Bilan du projet backend</h2>
         <p>Ce projet m'a permis de renforcer ma pratique d'Express, de la securisation JWT et du design d'API REST. J'ai egalement progresse sur la gestion des erreurs, la coherence des reponses JSON et le decoupage controleur/service.</p>
+      </article>
+    </section>
+  
+    <section class="page-grid page-section">
+      <article class="page-panel reveal">
+        <p class="eyebrow">Methode de travail</p>
+        <h2>Organisation Kanban (solo)</h2>
+        <div class="bullet-list">
+          <p><strong>Sprint 1:</strong> configuration du socle backend (Express, connexion base de donnees, modele utilisateur et authentification JWT).</p>
+          <p><strong>Sprint 2:</strong> developpement des routes metier (CRUD evenements/inscriptions), validations des donnees et gestion des erreurs metier.</p>
+          <p><strong>Sprint 3:</strong> securisation des endpoints (middlewares, droits d'acces), tests API Postman et stabilisation des reponses JSON.</p>
+        </div>
+      </article>
+      <article class="page-panel reveal">
+        <p class="eyebrow">Conformite RGPD</p>
+        <h2>Articles appliques</h2>
+        <div class="bullet-list">
+          <p><strong>Art. 6 §1 b) :</strong> le traitement des donnees personnelles (email, mot de passe hache) est licite car necessaire a l'execution du contrat de service (creation de compte, authentification).</p>
+          <p><strong>Art. 25 :</strong> protection des donnees des la conception — les mots de passe sont haches via bcrypt, aucune donnee superflue n'est stockee en base (privacy by design et by default).</p>
+          <p><strong>Art. 32 §1 b) :</strong> securite du traitement garantie par la signature des tokens JWT, leur expiration courte, et le transport exclusivement via HTTPS pour eviter l'interception.</p>
+          <p><strong>Art. 17 §1 :</strong> droit a l'effacement mis en oeuvre via un endpoint dedie permettant a l'utilisateur de supprimer son compte et l'ensemble de ses donnees associees.</p>
+        </div>
       </article>
     </section>
   </main>
@@ -167,3 +161,4 @@
   <script type="module" src="/app.js"></script>
 </body>
 </html>
+
